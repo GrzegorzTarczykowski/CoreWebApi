@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using CoreWebApi.MsSqlServerDB.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CoreWebApi.MsSqlServerDB
 {
-    public partial class MsSqlServerContext : DbContext
+    public partial class MsSqlServerContext : IdentityDbContext
     {
         public MsSqlServerContext()
         {
@@ -41,6 +41,8 @@ namespace CoreWebApi.MsSqlServerDB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Message>(entity =>
             {
                 entity.HasIndex(e => e.OrderId)
@@ -317,10 +319,6 @@ namespace CoreWebApi.MsSqlServerDB
             {
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
