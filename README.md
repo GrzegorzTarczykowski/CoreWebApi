@@ -4,6 +4,7 @@ Scaffold-DbContext "Data Source=localhost;Initial Catalog=CarRepairShopSupportSy
 
 
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
