@@ -33,8 +33,14 @@ namespace CoreWebApi
 
             services.AddDbContext<MsSqlServerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MsSqlServerDatabase")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+
+            services.AddDefaultIdentity<IdentityUser>()
                     .AddEntityFrameworkStores<MsSqlServerContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 7;
+            });
 
             services.AddSwaggerGen(c =>
             {
