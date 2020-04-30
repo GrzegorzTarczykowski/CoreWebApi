@@ -48,3 +48,35 @@ Create Identity Tables
 Add-Migration AddingIdentity
 
 Update-Database -Migration AddingIdentity
+
+# Angular
+
+install runtime environment https://nodejs.org/en/
+
+instal tool for generating the basic Angular structure https://cli.angular.io/ 
+
+CMD:
+
+npm install -g @angular/cli
+
+ng new my-first-project
+
+cd my-first-project
+
+code .
+
+CODE:
+
+Termina -> New Terminal -> npm install <- installing needed dependencies
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser <-- usefull
+
+ng generate module {YourModuleName} <-- create module
+
+ng generate component {YourComponentName} //optional --module={YourModuleName}
+
+ng serve <-- Compile
+
+ctrl + c <-- stop Compile
+
+ctrl + k + s <- save all
