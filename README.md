@@ -57,6 +57,8 @@ instal tool for generating the basic Angular structure https://cli.angular.io/
 
 CMD:
 
+npm cache clean --force (optional)
+
 npm install -g @angular/cli
 
 ng new my-first-project
