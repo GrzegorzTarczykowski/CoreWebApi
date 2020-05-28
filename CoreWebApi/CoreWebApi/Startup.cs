@@ -46,6 +46,8 @@ namespace CoreWebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +58,9 @@ namespace CoreWebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod());
             app.UseHttpsRedirection();
 
             app.UseSwagger();

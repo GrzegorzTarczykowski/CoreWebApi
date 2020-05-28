@@ -24,7 +24,7 @@ namespace CoreWebApi.Controllers
 
         [HttpPost]
         [Route("Register")]
-        //POST: api/IdentityUserController/Register
+        //POST: api/IdentityUser/Register
         public async Task<object> PostIdentityUser(UserModel userModel)
         {
             var identityUser = new IdentityUser()
