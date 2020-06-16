@@ -4,10 +4,10 @@ body{
 }
 
 input.form-control, input.form-control:focus{
-    background-color: cyan;
+    background-color: darkgray;
     color: black;
     border-color: black;
-    border-radius: 0px;
+    border-radius: 10px;
     border-width: 2px;
 }
 
@@ -20,6 +20,15 @@ button[type=submit].btn{
     border-radius: 20px;
     background-color: #000;
     color: #fff;
+}
+
+div.form-group input.invalid{
+    border: 1px solid #dc3545;
+}
+
+div.form-group label:first-child{
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
 div.form-group label{
@@ -43,4 +52,24 @@ form{
 
 .side-header {
     border-style: solid;
+}
+
+div.wrapper{
+    background: blue;
+    border-radius: 0px;
+}
+
+div.wrapped-div{
+    position: absolute;
+    align-self: center;
+    width: 300px;
+    background: gray;
+    border-radius: 20px;
+    top: 10%;
+    left: 30%;
+    text-align: center;
+}
+
+.div.tap-header{
+    float: left;
 }
