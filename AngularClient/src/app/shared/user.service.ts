@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-
+export class UserService 
+{
   constructor(private fb:FormBuilder, private httpClient:HttpClient) { }
   readonly BaseURL = 'https://localhost:44351/api';
 
@@ -44,5 +44,10 @@ export class UserService {
       Password: this.formModel.value.Passwords.Password,
     };
     return this.httpClient.post(this.BaseURL + '/IdentityUser/Register', body);
+  }
+
+  login(formData)
+  {
+    return this.httpClient.post(this.BaseURL + '/IdentityUser/Login', formData);
   }
 }
