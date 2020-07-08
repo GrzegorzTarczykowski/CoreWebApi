@@ -72,4 +72,5 @@ div.wrapped-div{
 
 .div.tap-header{
     float: left;
+    outline: none;
 }
