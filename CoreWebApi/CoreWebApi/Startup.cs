@@ -42,6 +42,7 @@ namespace CoreWebApi
                 options.UseSqlServer(Configuration.GetConnectionString("MsSqlServerDatabase")));
 
             services.AddDefaultIdentity<IdentityUser>()
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<MsSqlServerContext>();
 
             services.Configure<IdentityOptions>(options =>

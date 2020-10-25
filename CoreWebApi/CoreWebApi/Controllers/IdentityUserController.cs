@@ -34,6 +34,7 @@ namespace CoreWebApi.Controllers
         //POST: api/IdentityUser/Register
         public async Task<object> PostIdentityUser(UserModel userModel)
         {
+            userModel.Role = "Customer";
             var identityUser = new IdentityUser()
             {
                 UserName = userModel.UserName,
@@ -43,6 +44,7 @@ namespace CoreWebApi.Controllers
             try
             {
                 var result = await userManager.CreateAsync(identityUser, userModel.Password);
+                await userManager.AddToRoleAsync(identityUser, userModel.Role);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -59,11 +61,14 @@ namespace CoreWebApi.Controllers
             var user = await userManager.FindByNameAsync(loginModel.UserName);
             if (user != null && await userManager.CheckPasswordAsync(user, loginModel.Password))
             {
+                var roles = await userManager.GetRolesAsync(user);
+                IdentityOptions identityOptions = new IdentityOptions();
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("UserId", user.Id.ToString())
+                        new Claim("UserId", user.Id.ToString()),
+                        new Claim(identityOptions.ClaimsIdentity.RoleClaimType, roles.FirstOrDefault())
                     }),
                     Expires = DateTime.Now.AddMinutes(5),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)

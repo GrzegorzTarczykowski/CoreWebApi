@@ -56,4 +56,19 @@ export class UserService
     //var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + localStorage.getItem('token')});
     return this.httpClient.get(this.BaseURL + '/UserProfile');//, {headers: tokenHeader}); //auth.interceptor inject token
   }
+
+  roleMatch(allowedRoles) : boolean 
+  {
+    var isMatch = false;
+    var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+    var userRole = payLoad.role;
+    allowedRoles.array.forEach(element => {
+      if (userRole == element)
+      {
+        isMatch = true;
+        return false;
+      }
+    });
+    return isMatch;
+  }
 }
