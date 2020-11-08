@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-    background-color: cyan;
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+
+.container-user-credential {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    padding: 10px;
+    width: 400px;
+    min-height: 500px;
 }
+
+/*  */
 
 input.form-control, input.form-control:focus{
     background-color: darkgray;
@@ -36,7 +46,7 @@ div.form-group label{
     font-weight: bold;
 }
 
-div.form-group.required>label:first-child:after{
+div.form-group.required > label:first-child:after{
     content: '*';
     color: #dc3545;
     padding-left: 5px;
@@ -46,31 +56,8 @@ div.form-group.required>label:first-child:after{
     opacity: 1;
 }
 
-form{
-    margin: 0px 16px;
-}
-
 .side-header {
     border-style: solid;
 }
 
-div.wrapper{
-    background: blue;
-    border-radius: 0px;
-}
-
-div.wrapped-div{
-    position: absolute;
-    align-self: center;
-    width: 300px;
-    background: gray;
-    border-radius: 20px;
-    top: 10%;
-    left: 30%;
-    text-align: center;
-}
-
-.div.tap-header{
-    float: left;
-    outline: none;
-}
+/*  */

@@ -18,8 +18,8 @@ namespace CoreWebApi.Controllers
     [ApiController]
     public class IdentityUserController : ControllerBase
     {
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
         private readonly ApplicationSettings appSettings;
 
         public IdentityUserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<ApplicationSettings> appSettings)
@@ -43,8 +43,11 @@ namespace CoreWebApi.Controllers
 
             try
             {
-                var result = await userManager.CreateAsync(identityUser, userModel.Password);
-                await userManager.AddToRoleAsync(identityUser, userModel.Role);
+                IdentityResult result = await userManager.CreateAsync(identityUser, userModel.Password);
+                if (result.Succeeded)
+                {
+                    result = await userManager.AddToRoleAsync(identityUser, userModel.Role);
+                }
                 return Ok(result);
             }
             catch (Exception ex)

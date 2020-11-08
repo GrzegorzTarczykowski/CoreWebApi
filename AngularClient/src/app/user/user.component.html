@@ -1,18 +1,17 @@
-<!-- <div class="container">
-    <div class="col-md-8 offset-md-2">
-        <router-outlet></router-outlet>
+<div class="container container-user-credential">
+    <div class="row justify-content-center">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" routerLink='/user/login' routerLinkActive='active'>Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" routerLink='/user/registration' routerLinkActive='active'>Sign Up</a>
+            </li>
+        </ul>
     </div>
-</div> -->
-<div class="wrapper">
-    <div class="wrapped-div">
-        <div class="tap-header">
-            <h2 routerLink='/user/login' routerLinkActive='active'>Sing In</h2>
-            <h2 routerLink='/user/registration' routerLinkActive='active'>Sing Up</h2>
-        </div>
-        <div class="row">
-            <div class="col-md-10 offset-md-1">
-                <router-outlet></router-outlet>
-            </div>
+    <div class="row justify-content-center">
+        <div class="">
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>
