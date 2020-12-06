@@ -1,0 +1,8 @@
+<section class="topbar">
+  <app-topbar class="mat-elevation-z4" (menuToggled)="onMenuToggled()"></app-topbar>
+</section>
+
+<section class="content">
+  <app-sidebar [ngClass]="{ 'hidden': !isMenuOpened }"></app-sidebar>
+  <app-main-content [ngClass]="{ 'sidebar-hidden': !isMenuOpened }"></app-main-content>
+</section>

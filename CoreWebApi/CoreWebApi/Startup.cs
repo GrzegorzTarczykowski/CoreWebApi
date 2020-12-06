@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreWebApi.Middlewares;
 using CoreWebApi.Models;
 using CoreWebApi.MsSqlServerDB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -102,6 +103,7 @@ namespace CoreWebApi
 
             app.UseRouting();
 
+            app.UseRequestMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
 

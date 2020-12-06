@@ -1,0 +1,39 @@
+@import '~@angular/material/theming';
+
+:host:nth-of-type(2n) {
+    .comment {
+        background-color: rgba(201, 201, 201, 0.1);
+    }
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    background-color: rgba(63, 81, 181, 0.1);
+    border-radius: 15px;
+    padding: 10px;
+    @include mat-elevation(1);
+
+    &.odd {
+        background-color: rgba(103, 100, 181, 0.1);
+    }
+
+    .comment-header {
+        height: 50px;
+        display: flex;
+
+        .divider {
+            flex-grow: 1;
+        }
+
+        .mat-icon {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    }
+
+    .comment-body {
+        flex-grow: 1;
+    }
+}

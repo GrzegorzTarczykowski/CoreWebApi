@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $topbarHeight;
+    z-index: 3;
+    // position: fixed;
+}
+
+.observed-posts {
+    cursor: pointer;
+}

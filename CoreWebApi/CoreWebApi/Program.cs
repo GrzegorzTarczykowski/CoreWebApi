@@ -13,7 +13,10 @@ namespace CoreWebApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            IHost host = CreateHostBuilder(args).Build();
+            ILogger<Program> logger = (ILogger<Program>)host.Services.GetService(typeof(ILogger<Program>));
+            logger.LogInformation("Start Program");
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

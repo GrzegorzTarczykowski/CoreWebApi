@@ -1,0 +1,26 @@
+.mat-card {
+    margin-bottom: 10px;
+}
+
+.post-icon {
+    font-size: 36px;
+}
+
+.comment-icon {
+    margin-right: 10px;
+}
+
+.observe-button {
+
+    &.not-observed {
+        color: rgba(200, 200, 200, 0.7);
+    }
+
+    &:hover {
+        color: rgba(253, 213, 34, 0.7);
+    }
+
+    &.observed {
+        color: rgba(253, 213, 34, 1);
+    }
+}

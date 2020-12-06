@@ -1,6 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
+/* @import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; */
+/* @import '../node_modules/font-awesome/css/font-awesome.min.css'; */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+p, h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+}
 
 .container-user-credential {
     margin-top: 100px;
@@ -11,7 +26,11 @@
     min-height: 500px;
 }
 
-/*  */
+button[type=submit].btn{
+    border-radius: 20px;
+    background-color: #000;
+    color: #fff;
+}
 
 input.form-control, input.form-control:focus{
     background-color: darkgray;
@@ -24,12 +43,6 @@ input.form-control, input.form-control:focus{
 input.form-control:focus{
     box-shadow: none;
     border-bottom-color: black;
-}
-
-button[type=submit].btn{
-    border-radius: 20px;
-    background-color: #000;
-    color: #fff;
 }
 
 div.form-group input.invalid{
@@ -56,8 +69,5 @@ div.form-group.required > label:first-child:after{
     opacity: 1;
 }
 
-.side-header {
-    border-style: solid;
-}
-
-/*  */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

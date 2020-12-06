@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+:host {
+    padding: $standardPadding;
+    padding-left: $sidebarWidth + $standardPadding;
+    flex-grow: 1;
+    background-color: rgba(250, 250, 250, 0.7);
+    transition: padding-left 0.2s ease-in-out;
+}
+
+:host.sidebar-hidden {
+    padding-left: $standardPadding;
+}

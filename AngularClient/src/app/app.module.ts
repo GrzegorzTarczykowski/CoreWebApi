@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     ToastrModule.forRoot({
       progressBar: true
     }),
-    FormsModule
+    FormsModule,
+    LayoutModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,
