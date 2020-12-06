@@ -82,3 +82,7 @@ ng serve <-- Compile
 ctrl + c <-- stop Compile
 
 ctrl + k + s <- save all
+
+Add Angular Material
+
+ng add @angular/material
