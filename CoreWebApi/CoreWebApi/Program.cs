@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -21,9 +16,18 @@ namespace CoreWebApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureLogging(logging =>
+            {
+                logging.SetMinimumLevel(LogLevel.Information);
+                logging.AddEventLog(eventLogSettings =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    eventLogSettings.SourceName = "CoreWebApiLogs";
                 });
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                //webBuilder.UseKestrel();
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

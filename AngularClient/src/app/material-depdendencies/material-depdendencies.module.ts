@@ -6,6 +6,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -16,7 +18,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatListModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
@@ -24,7 +28,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatListModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialDepdendenciesModule { }
