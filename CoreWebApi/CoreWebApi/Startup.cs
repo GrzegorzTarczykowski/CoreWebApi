@@ -1,24 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CoreWebApi.Middlewares;
 using CoreWebApi.Models;
 using CoreWebApi.MsSqlServerDB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Text;
 
 namespace CoreWebApi
 {
@@ -34,8 +29,8 @@ namespace CoreWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Inject AppSetting
-            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            services.Configure<ApplicationSettings>(
+                Configuration.GetSection(ApplicationSettings.ApplicationSettingsSection));
 
             services.AddControllers();
 
@@ -59,7 +54,9 @@ namespace CoreWebApi
             services.AddCors();
 
             //Jwt Authentication
-
+            //Not recommended
+            //string JWT_Secret = services.BuildServiceProvider()
+            //    .GetService<IOptions<ApplicationSettings>>().Value.JWT_Secret;
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
 
             services.AddAuthentication(x =>
@@ -71,7 +68,7 @@ namespace CoreWebApi
             {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = false;
-                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -83,14 +80,15 @@ namespace CoreWebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env
+            , IOptionsMonitor<ApplicationSettings> optionsAccessor)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+            app.UseCors(builder => builder.WithOrigins(optionsAccessor.CurrentValue.Client_URL)
                                           .AllowAnyHeader()
                                           .AllowAnyMethod());
             app.UseHttpsRedirection();
@@ -102,7 +100,7 @@ namespace CoreWebApi
             });
 
             app.UseRouting();
-
+            
             app.UseRequestMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();

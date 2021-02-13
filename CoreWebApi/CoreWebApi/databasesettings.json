@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "MsSqlServerDatabase": 
+      "Data Source=localhost;Initial Catalog=CarRepairShopSupportSystemDataBaseCore;Integrated Security=true;POOLING=FALSE;MultipleActiveResultSets=True;"
+  }
+}

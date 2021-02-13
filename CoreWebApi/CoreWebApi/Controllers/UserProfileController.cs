@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoreWebApi.Controllers
 {
@@ -13,7 +10,7 @@ namespace CoreWebApi.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        private UserManager<IdentityUser> userManager;
+        private readonly UserManager<IdentityUser> userManager;
         public UserProfileController(UserManager<IdentityUser> userManager)
         {
             this.userManager = userManager;
