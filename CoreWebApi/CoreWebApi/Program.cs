@@ -18,6 +18,7 @@ namespace CoreWebApi
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .AddConfiguration()
+            .AddServices()
             .ConfigureLogging(logging =>
             {
                 logging.SetMinimumLevel(LogLevel.Information);

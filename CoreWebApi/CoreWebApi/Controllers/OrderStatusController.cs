@@ -1,72 +1,61 @@
-﻿using CoreWebApi.MsSqlServerDB;
-using CoreWebApi.MsSqlServerDB.Models;
+﻿using CoreWebApi.Filters;
+using CoreWebApi.Models;
+using CoreWebApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoreWebApi.Controllers
 {
     [Route("api/[controller]")]
+    [TypeFilter(typeof(ExceptionFilter))]
     [ApiController]
     public class OrderStatusController : ControllerBase
     {
-        private readonly MsSqlServerContext context;
-        private readonly IConfiguration configuration;
+        private readonly IOrderStatusService orderStatusService;
 
-        public OrderStatusController(MsSqlServerContext context, IConfiguration configuration)
+        public OrderStatusController(IOrderStatusService orderStatusService)
         {
-            this.context = context;
-            this.configuration = configuration;
+            this.orderStatusService = orderStatusService;
         }
 
         // GET: api/OrderStatus
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderStatus>>> GetOrderStatus()
+        public async Task<IActionResult> GetOrderStatus()
         {
-            string environmentVariable = configuration.GetValue<string>("EnvironmentVariable");
-            string environmentVariable2 = Environment.GetEnvironmentVariable("EnvironmentVariable");
-            string secretVariable = configuration.GetValue<string>("SecretVariable");
-            return await context.OrderStatus.ToListAsync();
+            return Ok(await orderStatusService.GetOrderStatusList());
         }
 
         // GET: api/OrderStatus/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<OrderStatus>> GetOrderStatus(int id)
+        public async Task<IActionResult> GetOrderStatus(int id)
         {
-            var orderStatus = await context.OrderStatus.FindAsync(id);
-
+            var orderStatus = orderStatusService.GetOrderStatus(id);
             if (orderStatus == null)
             {
                 return NotFound();
             }
-
-            return orderStatus;
+            return Ok(await orderStatus);
         }
 
         // PUT: api/OrderStatus/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrderStatus(int id, OrderStatus orderStatus)
+        public async Task<IActionResult> PutOrderStatus(int id, OrderStatusModel orderStatus)
         {
             if (id != orderStatus.OrderStatusId)
             {
                 return BadRequest();
             }
 
-            context.Entry(orderStatus).State = EntityState.Modified;
-
             try
             {
-                await context.SaveChangesAsync();
+                await orderStatusService.PutOrderStatus(id, orderStatus);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderStatusExists(id))
+                if (!orderStatusService.OrderStatusExists(id).Result)
                 {
                     return NotFound();
                 }
@@ -83,33 +72,29 @@ namespace CoreWebApi.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<OrderStatus>> PostOrderStatus(OrderStatus orderStatus)
+        public async Task<IActionResult> PostOrderStatus(OrderStatusModel orderStatus)
         {
-            context.OrderStatus.Add(orderStatus);
-            await context.SaveChangesAsync();
-
+            await orderStatusService.PostOrderStatus(orderStatus);
             return CreatedAtAction("GetOrderStatus", new { id = orderStatus.OrderStatusId }, orderStatus);
         }
 
         // DELETE: api/OrderStatus/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<OrderStatus>> DeleteOrderStatus(int id)
+        public async Task<IActionResult> DeleteOrderStatus(int id)
         {
-            var orderStatus = await context.OrderStatus.FindAsync(id);
+            var orderStatus = await orderStatusService.DeleteOrderStatus(id);
             if (orderStatus == null)
             {
                 return NotFound();
             }
-
-            context.OrderStatus.Remove(orderStatus);
-            await context.SaveChangesAsync();
-
-            return orderStatus;
+            return Ok(orderStatus);
         }
 
-        private bool OrderStatusExists(int id)
+        // HEAD: api/OrderStatus/5
+        [HttpHead("{id}")]
+        public async Task<IActionResult> OrderStatusExists(int id)
         {
-            return context.OrderStatus.Any(e => e.OrderStatusId == id);
+            return Ok(await orderStatusService.OrderStatusExists(id));
         }
     }
 }

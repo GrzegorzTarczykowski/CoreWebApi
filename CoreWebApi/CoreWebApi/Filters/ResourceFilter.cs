@@ -3,14 +3,14 @@ using System;
 
 namespace CoreWebApi.Filters
 {
-    public class RequestFilter : IActionFilter
+    public class ResourceFilter : IResourceFilter
     {
-        public void OnActionExecuted(ActionExecutedContext context)
+        public void OnResourceExecuted(ResourceExecutedContext context)
         {
             throw new NotImplementedException();
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public void OnResourceExecuting(ResourceExecutingContext context)
         {
             throw new NotImplementedException();
         }
